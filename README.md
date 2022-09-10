@@ -7,12 +7,19 @@ editor_options:
 
 ------------------------------------------------------------------------
 Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis
-
+---
 Original Research: Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: An application of the theory of planned behavior
+
+Authors:
 
 
 # Data analysis
-Objective: Create new ways to understand the reality using real data.
+Problem:
+
+Objective:
+
+Hipotesis:
+
 -
 date: 05/07/2022
 
@@ -39,3 +46,9 @@ library(ggpubr)
 library(tidyverse)
 library(readr)
 ```
+
+
+
+
+
+
