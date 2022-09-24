@@ -11,8 +11,11 @@ Secondary Analysis: Determinants of COVID-19 vaccination intention using multipl
 Original Research: Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: An application of the theory of planned behavior
 
 Authors: Dariusz Drążkowski, Radosław Trepanowski, Adam Mickiewicz
+
 Year: 2021
+
 Sample: 551 Polish participants
+
 DOI: https://doi.org/10.1080/13548506.2021.2014060
 
 # Data analysis
