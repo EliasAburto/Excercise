@@ -21,15 +21,13 @@ DOI: https://doi.org/10.1080/13548506.2021.2014060
 # Data analysis
 Problem: What are the determinants of COVID-19 vaccination intention?
 
-Objective:  To identify the determinants of COVID-19 vaccination through an application of the Theory of Planned Behavior.
+Objective:
+To identify the determinants of COVID-19 vaccination through an application of the Theory of Planned Behavior.
 
-Hypothesis: 
+Hypothesis:
 H1: Control beliefs have a direct impact on COVID-19 vaccination intention
 H2: Utility beliefs have a direct impact on COVID-19 vaccination intention
 H3: Social norm beliefs have a direct impact on COVID-19 vaccination intention
-
-date: 
-
 
 
 
