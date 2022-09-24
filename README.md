@@ -18,7 +18,7 @@ Problem:
 
 Objective:
 
-Hipotesis:
+Hypothesis:
 
 -
 date: 05/07/2022
