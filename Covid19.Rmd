@@ -1,12 +1,12 @@
-
 ---
-editor_options: 
-  markdown: 
-    wrap: 72
+title: "Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis"
+author: "Elías Aburto Camacllanqui"
+date: "2022-10-01"
+output: html_document
 ---
 
 ------------------------------------------------------------------------
-Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis
+
 ---
 Original Research: Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: An application of the theory of planned behavior
 
@@ -50,11 +50,11 @@ B. Regression Model Assumtions
 Install packages
 
 ```{r}
-install.packages("ggplot2")
-install.packages("dplyr")
-install.packages("broom")
-install.packages("ggpubr")
-install.packages("tidyverse")
+#install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("broom")
+#install.packages("ggpubr")
+#install.packages("tidyverse")
 ```
 
 load the packages
@@ -83,10 +83,6 @@ summary(Mydata$SE_Total)
 ```
 
 Perform the linear regression analysis
-
-
-
-
 
 
 ```{r}
@@ -148,12 +144,9 @@ par(mfrow=c(1,1))
 
 B5. Multicollinality: evaluate if the IVs are redundant.
 
+```{r}
 vif(Intention_lm)
-
-
-
-
-
+```
 
 
 

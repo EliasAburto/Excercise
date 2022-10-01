@@ -1,4 +1,3 @@
-
 library("foreign")
 library(ggplot2)
 library(dplyr)
@@ -10,6 +9,87 @@ library(car) #para analizar vif, colinealidad
 
 
 rm(list = ls())
+
+#Steps to prove the hypothesis
+
+#A. Model Evaluation
+
+#A1. Regression coeficients and r-square
+
+#Load the database
+
+Mydata=read.spss("COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
+View(Mydata)
+summary(Mydata$SE_Total)
+
+#Perform the linear regression analysis
+
+Intention_lm <- lm(IN_Total ~ SN_Total + BC_Total + AT_Total, data = Mydata)
+summary(Intention_lm)
+
+
+#A2. Interpretation
+
+#Bs ajusted: 
+
+# For each point obtained in the scale of subjective norms,
+# the intenton to COVID-19 vaccination intention will increase 0.36 points.
+# Also, subjective norms had a direct effect on COVID-19 vaccination intention 
+# and statistical significance.
+
+# For each point obtained in the scale of Behavioral Control,
+# the intenton to COVID-19 vaccination intention will increase 0.29 points.
+# Also, Behavioral Control had a direct effect on COVID-19 vaccination intention 
+# and statistical significance.
+
+
+# For each point obtained in the scale of Attitude Toward Covid-19 vaccination,
+# the intenton to COVID-19 vaccination intention will increase 0.45 points.
+# Also, Attitude Toward Covid-19 vaccination had a direct effect on COVID-19 vaccination intention 
+# and statistical significance.
+
+# The model with these three determinants explain 78% of variance of COVID-19 vaccination intention.
+
+
+#B. Regression Model Assumtions
+
+#B1. Lineality between IVs and Dv
+
+plot(IN_Total ~ SN_Total, data = Mydata)
+plot(IN_Total ~ BC_Total, data = Mydata)
+plot(IN_Total ~ AT_Total, data = Mydata)
+
+#B2. Independence of observations: The observation from our model are independent.
+
+# This is made when each observation was made by one participant.
+
+
+#B3. Homoscedasticity: The errors from our model have equal variance.
+
+par(mfrow=c(2,2))
+plot(Intention_lm)
+par(mfrow=c(1,1))
+
+
+#B4. Normality of Errors: The errors from our model are normally distributed.
+
+```{r}
+par(mfrow=c(2,2))
+plot(Intention_lm)
+par(mfrow=c(1,1))
+```
+
+#B5. Multicollinality: evaluate if the IVs are redundant.
+
+vif(Intention_lm)
+
+
+
+
+
+
+
+
 
 
 # Linear Regression with numeric VI
@@ -35,21 +115,6 @@ glimpse(Mydata$BC_Total)
 glimpse(Mydata$AT_Total)
 
 
-## Step 4: Make sure data assumptions
-
-#### A. Linearity
-
-plot(IN_Total ~ SN_Total, data = Mydata)
-plot(IN_Total ~ BC_Total, data = Mydata)
-plot(IN_Total ~ AT_Total, data = Mydata)
-
-
-#### B. Independence of observations
-
-#(Teoricamente se entiende que las variables son independientes).  Se entiende la independencia de las observaciones debido
-#a que cada observación proviene de individuos diferentes.
-
-
 
 #### C. Normality (Me parece que no es la normalidad de la variable sino de las observaciones)
 
@@ -59,14 +124,6 @@ hist(Mydata$BC_Total)
 hist(Mydata$AT_Total)
 
 # Se puede evaluar la normalidad por  QQplot, Kurtosis
-
-
-
-
-## Step 5: Perform the linear regression analysis
-
-Intention_lm <- lm(IN_Total ~ SN_Total + BC_Total + AT_Total, data = Mydata)
-summary(Intention_lm)
 
 
 
@@ -80,19 +137,12 @@ vif(Intention_lm)
 
 ## Step 4: Check the homocedasticity - 
 
-par(mfrow=c(2,2))
-plot(Intention_lm)
-par(mfrow=c(1,1))
 
 
 
 
 
-## Step 5: Perform a graph to visualize the results
 
-## Step 6: Report and interpret your results
-
-# Multiple Regression with numeric VI
 
 ## Step 1: Load the data into R
 
