@@ -2,7 +2,14 @@
 title: "Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis"
 author: "Elías Aburto Camacllanqui"
 date: "2022-10-01"
-output: html_document
+output: 
+  html_document:
+    code_folding: show
+    fig_caption: yes
+    theme: cerulean
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
 ---
 
 ------------------------------------------------------------------------
@@ -18,7 +25,8 @@ Sample: 551 Polish participants
 
 DOI: https://doi.org/10.1080/13548506.2021.2014060
 
-# Data analysis
+# Multiple Regression Analysis: Step by step
+
 Problem: What are the determinants of COVID-19 vaccination intention?
 
 Objective:
@@ -59,7 +67,7 @@ Install packages
 
 load the packages
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library("foreign")
 library(ggplot2)
 library(dplyr)
@@ -70,13 +78,13 @@ library(readr)
 library(car)
 ```
 
-A. Model Evaluation
+## A. Model Evaluation
 
-A1. Regression coeficients and r-square
+### A1. Regression coeficients and r-square
 
 Load the database
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 Mydata=read.spss("COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
 View(Mydata)
 summary(Mydata$SE_Total)
@@ -90,7 +98,7 @@ Intention_lm <- lm(IN_Total ~ SN_Total + BC_Total + AT_Total, data = Mydata)
 summary(Intention_lm)
 ```
 
-A2. Interpretation
+### A2. Interpretation
 
 Bs ajusted: 
 
@@ -111,9 +119,9 @@ and statistical significance.
 The model with these three determinants explain 78% of variance of COVID-19 vaccination intention.
 
 
-B. Regression Model Assumtions
+## B. Regression Model Assumtions
 
-B1. Lineality between IVs and Dv
+### B1. Lineality between IVs and Dv
 
 ```{r}
 plot(IN_Total ~ SN_Total, data = Mydata)
@@ -121,12 +129,16 @@ plot(IN_Total ~ BC_Total, data = Mydata)
 plot(IN_Total ~ AT_Total, data = Mydata)
 ```
 
-B2. Independence of observations: The observation from our model are independent.
+### B2. Independence of observations 
+
+The observation from our model are independent.
 
 This was fulfilled when each observation was made by one participant.
 
 
-B3. Homoscedasticity: The errors from our model have equal variance.
+### B3. Homocedasticity
+
+The errors from our model have equal variance.
 
 ```{r}
 par(mfrow=c(2,2))
@@ -134,7 +146,9 @@ plot(Intention_lm)
 par(mfrow=c(1,1))
 ```
 
-B4. Normality of Errors: The errors from our model are normally distributed.
+### B4. Normality of Errors
+
+The errors from our model are normally distributed.
 
 ```{r}
 par(mfrow=c(2,2))
@@ -142,7 +156,7 @@ plot(Intention_lm)
 par(mfrow=c(1,1))
 ```
 
-B5. Multicollinality: evaluate if the IVs are redundant.
+### B5. Multicollinality: evaluate if the IVs are redundant.
 
 ```{r}
 vif(Intention_lm)
