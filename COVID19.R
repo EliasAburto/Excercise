@@ -18,7 +18,7 @@ rm(list = ls())
 
 #Load the database
 
-Mydata=read.spss("COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
+Mydata=read.spss("data/COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
 View(Mydata)
 summary(Mydata$SE_Total)
 
