@@ -8,6 +8,7 @@ library(readr)
 library(car) #para analizar vif, colinealidad
 
 
+
 rm(list = ls())
 
 #Steps to prove the hypothesis
