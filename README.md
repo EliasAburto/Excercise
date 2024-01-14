@@ -1,160 +1,17 @@
 
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
-------------------------------------------------------------------------
-Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis
----
-Original Research: Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: An application of the theory of planned behavior
-
-Authors: Dariusz Drążkowski, Radosław Trepanowski, Adam Mickiewicz
-
-Year: 2021
-
-Sample: 551 Polish participants
-
-DOI: https://doi.org/10.1080/13548506.2021.2014060
-
-# Data analysis
-Problem: What are the determinants of COVID-19 vaccination intention?
-
-Objective:
-To identify the determinants of COVID-19 vaccination through an application of the Theory of Planned Behavior.
-
-Hypothesis:
-H1: Control beliefs have a direct impact on COVID-19 vaccination intention
-H2: Utility beliefs have a direct impact on COVID-19 vaccination intention
-H3: Social norm beliefs have a direct impact on COVID-19 vaccination intention
+# Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis
 
 
-Steps to prove the hypothesis
+Summary
 
-A. Model Evaluation
-
-1. Regression coeficients and r-square
-2. Interpretation
-
-B. Regression Model Assumtions
-
-1. Lineality between IVs and Dv
-2. Independence of observations: The observation from our model are independent.
-3. Homoscedasticity: The errors from our model have equal variance.
-4. Normality of Errors: The errors from our model are normally distributed.
-5. Multicollinality: evaluate if the IVs are redundant.
+I make a secondary analysis using multiple regression analysis. I used the data from Drążkowski & Trepanowski (2022) which was published in a open source repository.
 
 
+You can see my project here: https://eliasaburtoc.github.io/Linear-Regression/
 
-Install packages
-
-```{r}
-install.packages("ggplot2")
-install.packages("dplyr")
-install.packages("broom")
-install.packages("ggpubr")
-install.packages("tidyverse")
-```
-
-load the packages
-
-```{r}
-library("foreign")
-library(ggplot2)
-library(dplyr)
-library(broom)
-library(ggpubr)
-library(tidyverse)
-library(readr)
-library(car)
-```
-
-A. Model Evaluation
-
-A1. Regression coeficients and r-square
-
-Load the database
-
-```{r}
-Mydata=read.spss("data/COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
-View(Mydata)
-summary(Mydata$SE_Total)
-```
-
-Perform the linear regression analysis
+Thanks!
 
 
+Reference
 
-
-
-
-```{r}
-Intention_lm <- lm(IN_Total ~ SN_Total + BC_Total + AT_Total, data = Mydata)
-summary(Intention_lm)
-```
-
-A2. Interpretation
-
-Bs ajusted: 
-
-For each point obtained in the scale of subjective norms,
-the intenton to COVID-19 vaccination intention will increase 0.36 points.
-Also, subjective norms had a direct effect on COVID-19 vaccination intention it was statistically significant.
-
-For each point obtained in the scale of Behavioral Control,
-the intenton to COVID-19 vaccination intention will increase 0.29 points.
-Also, Behavioral Control had a direct effect on COVID-19 vaccination intention and it was statistically significant.
-
-
-For each point obtained in the scale of Attitude Toward Covid-19 vaccination,
-the intenton to COVID-19 vaccination intention will increase 0.45 points.
-Also, Attitude Toward Covid-19 vaccination had a direct effect on COVID-19 vaccination intention 
-and statistical significance.
-
-The model with these three determinants explain 78% of variance of COVID-19 vaccination intention.
-
-
-B. Regression Model Assumtions
-
-B1. Lineality between IVs and Dv
-
-```{r}
-plot(IN_Total ~ SN_Total, data = Mydata)
-plot(IN_Total ~ BC_Total, data = Mydata)
-plot(IN_Total ~ AT_Total, data = Mydata)
-```
-
-B2. Independence of observations: The observation from our model are independent.
-
-This was fulfilled when each observation was made by one participant.
-
-
-B3. Homoscedasticity: The errors from our model have equal variance.
-
-```{r}
-par(mfrow=c(2,2))
-plot(Intention_lm)
-par(mfrow=c(1,1))
-```
-
-B4. Normality of Errors: The errors from our model are normally distributed.
-
-```{r}
-par(mfrow=c(2,2))
-plot(Intention_lm)
-par(mfrow=c(1,1))
-```
-
-B5. Multicollinality: evaluate if the IVs are redundant.
-
-vif(Intention_lm)
-
-
-
-
-
-
-
-
-
+- Dariusz Drążkowski & Radosław Trepanowski (2022) Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: an application of the theory of planned behavior, Psychology, Health & Medicine, 27:10, 2171-2178, DOI: 10.1080/13548506.2021.2014060
