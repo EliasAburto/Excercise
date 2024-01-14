@@ -1,5 +1,5 @@
 ---
-title: "Secondary Analysis: Determinants of COVID-19 vaccination intention using multiple regression analysis"
+title: "Consumer behavior: Determinants of COVID-19 vaccination intention using Planned Behavior Theory"
 author: "Elías Aburto Camacllanqui"
 date: "2022-10-01"
 output: 
@@ -12,34 +12,34 @@ output:
     toc_float: yes
 ---
 
+# Introduction
 
-------------------------------------------------------------------------
+<!-- Adjust size using width and height attributes -->
+<img src="images/covid.jpg" alt="COVID-19 vaccination" width="350" height="500" style="float:right; margin: 0 0 10px 10px;">
 
+**Problem of research:** What are the determinants of COVID-19 vaccination intention?
 
----
-Original Research: Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: An application of the theory of planned behavior
-
-Authors: Dariusz Drążkowski, Radosław Trepanowski, Adam Mickiewicz
-
-
-Year: 2021
-
-Sample: 551 Polish participants
-
-DOI: https://doi.org/10.1080/13548506.2021.2014060
-
-# Multiple Regression Analysis: Step by step
-
-Problem: What are the determinants of COVID-19 vaccination intention?
-
-Objective:
+**Objective:**
 To identify the determinants of COVID-19 vaccination through an application of the Theory of Planned Behavior.
 
-Hypothesis:
-H1: Control beliefs have a direct impact on COVID-19 vaccination intention
-H2: Utility beliefs have a direct impact on COVID-19 vaccination intention
-H3: Social norm beliefs have a direct impact on COVID-19 vaccination intention
+**Hypothesis:**
 
+- H1: Control beliefs have a direct impact on COVID-19 vaccination intention.
+
+- H2: Utility beliefs have a direct impact on COVID-19 vaccination intention.
+
+- H3: Social norm beliefs have a direct impact on COVID-19 vaccination intention.
+
+
+# Methodology
+
+**Sample:** 551 Polish participants.
+
+
+**Study Design:** The original research used a structural equation modeling (Drążkowski & Trepanowski, 2022)  but, in this case, I'm using a multiple linear regression to explain the necessary proccess that a research must have with this design. Therefore, I'm doing a secondary analysis.
+
+
+# Multiple Regression Analysis: Step by step
 
 Steps to prove the hypothesis
 
@@ -54,8 +54,16 @@ B. Regression Model Assumtions
 2. Independence of observations: The observation from our model are independent.
 3. Homoscedasticity: The errors from our model have equal variance.
 4. Normality of Errors: The errors from our model are normally distributed.
-5. Multicollinality: evaluate if the IVs are redundant.
 
+C. Additional information
+
+1. Multicollinality: evaluate if the IVs are redundant.
+2. Diagnostics: to assess the overall goodness-of-fit.
+
+
+## A. Model Evaluation
+
+### A1. Regression coeficients and r-square
 
 
 Install packages
@@ -81,15 +89,15 @@ library(readr)
 library(car)
 ```
 
-## A. Model Evaluation
-
-### A1. Regression coeficients and r-square
 
 Load the database
 
 ```{r, message=FALSE, warning=FALSE}
-Mydata=read.spss("data/COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
+
+Mydata <- read.spss("data/COVID_data.sav",to.data.frame=T,use.value.labels=FALSE)
+
 View(Mydata)
+
 summary(Mydata$SE_Total)
 ```
 
@@ -99,25 +107,31 @@ Perform the linear regression analysis
 ```{r}
 Intention_lm <- lm(IN_Total ~ SN_Total + BC_Total + AT_Total, data = Mydata)
 summary(Intention_lm)
+
 ```
 
-### A2. Interpretation
 
-Bs ajusted: 
+### A2. Interpretation of Bs ajusted
 
-For each point obtained in the scale of subjective norms,
-the intenton to COVID-19 vaccination intention will increase 0.36 points.
-Also, subjective norms had a direct effect on COVID-19 vaccination intention it was statistically significant.
+About Subjective Norms,
 
-For each point obtained in the scale of Behavioral Control,
-the intenton to COVID-19 vaccination intention will increase 0.29 points.
-Also, Behavioral Control had a direct effect on COVID-19 vaccination intention and it was statistically significant.
+Prediction: For each point obtained in the scale of subjective norms, the intenton to COVID-19 vaccination intention will increase 0.36 points. 
+
+Explanation: Subjective norms had a direct and positive effect  on COVID-19 vaccination intention it was statistically significant.
+
+About Behavioral Control,
+
+Prediction: For each point obtained in the scale of Behavioral Control, the intenton to COVID-19 vaccination intention will increase 0.29 points. 
+
+Explanation: Behavioral Control had a direct and positive effect on COVID-19 vaccination intention and it was statistically significant.
 
 
-For each point obtained in the scale of Attitude Toward Covid-19 vaccination,
-the intenton to COVID-19 vaccination intention will increase 0.45 points.
-Also, Attitude Toward Covid-19 vaccination had a direct effect on COVID-19 vaccination intention 
-and statistical significance.
+About Attitude Toward Covid-19 vaccination,
+
+Prediction: For each point obtained in the scale of Attitude Toward Covid-19 vaccination, the intenton to COVID-19 vaccination intention will increase 0.45 points. 
+
+Explanation: Attitude Toward Covid-19 vaccination had a direct and positive effect on COVID-19 vaccination intention  and it was statistical significance.
+
 
 The model with these three determinants explain 78% of variance of COVID-19 vaccination intention.
 
@@ -126,44 +140,193 @@ The model with these three determinants explain 78% of variance of COVID-19 vacc
 
 ### B1. Lineality between IVs and Dv
 
+The relationship between IVs and DV must be lineal.
+
 ```{r}
 plot(IN_Total ~ SN_Total, data = Mydata)
-plot(IN_Total ~ BC_Total, data = Mydata)
-plot(IN_Total ~ AT_Total, data = Mydata)
+abline(lm(IN_Total ~ SN_Total, data = Mydata), col = "red")
 ```
+
+
+It's observed that there is a linear relationship between Subjective Norms and COVID-19 Vaccination Intention
+
+
+```{r}
+plot(IN_Total ~ BC_Total, data = Mydata)
+abline(lm(IN_Total ~ BC_Total, data = Mydata), col = "red")
+```
+
+
+It's observed that there is a linear relationship between Behavioral Control and COVID-19 Vaccination Intention
+
+```{r}
+plot(IN_Total ~ AT_Total, data = Mydata)
+abline(lm(IN_Total ~ AT_Total, data = Mydata), col = "red")
+```
+
+
+It's observed that there is a linear relationship between Attitude toward Covid-19 vaccination and COVID-19 Vaccination Intention
+
+
 
 ### B2. Independence of observations 
 
-The observation from our model are independent.
+The covariances of errors must be cero.
 
-This was fulfilled when each observation was made by one participant.
+The observation from our model are independent. This was fulfilled when each observation was made by one participant.
+
+Evaluation:
+
+Use the Durbin-Watson Test. This is useful to test autocorrelation of residuals that must be cero.
+
+
+```{r, message=FALSE, warning=FALSE}
+library(car) # In this package is Durbin-Watson Test
+
+durbinWatsonTest(Intention_lm)
+
+```
+
+H0: There is not correlation among the residuals.
+H1: The residuals are autocorrelated.
+
+
+If the p-value is less than 0.05, you would reject the null hypothesis and conclude that there is evidence of autocorrelation in the residuals.
+
+If the p-value is greater than 0.05, you would fail to reject the null hypothesis, suggesting that there is insufficient evidence to conclude that there is autocorrelation in the residuals.
+
+
+In this result, since the p-value (0.002) is less than 0.05, we would conclude that there is evidence of autocorrelation in the residuals.
+
+
+Although, It was mention that D-W statistic is between 0 to 4. Values between 1.5 and 2.5 is ok. Therefore, in this test, we will consider it. In this study it was 2.24 which mean that is ok.
+
 
 
 ### B3. Homocedasticity
 
-The errors from our model have equal variance.
+The residuals are distribuided homogeneusly on the dependent variable. So they have iqual variance.
 
-```{r}
-par(mfrow=c(2,2))
-plot(Intention_lm)
-par(mfrow=c(1,1))
+Evaluation:
+- Diagrama de dispersión, Harrison-McCabe or Goldfeld-Quandt tests.
+
+
+Goldfeld-Quandt tests
+```{r, message=FALSE, warning=FALSE}
+# install.packages("lmtest")
+
+library(lmtest)
+
+gqtest(Intention_lm)
+
 ```
+H0: residuals have homogeneous variance.
+H1: residuals haven't homogeneous variance.
+
+As p value was 0.3781 greater than 0.05, We have insufficient evidence to reject the null hypothesis. So we can say that residuals have homogeneous variance.
+
+
+Harrison-McCabe test
+```{r, message=FALSE, warning=FALSE}
+hmctest(Intention_lm)
+```
+H0: residuals have homogeneous variance.
+H1: residuals haven't homogeneous variance.
+
+As p value was 0.379 greater than 0.05, We have insufficient evidence to reject the null hypothesis. So we can say that residuals have homogeneous variance.
+
+
 
 ### B4. Normality of Errors
 
-The errors from our model are normally distributed.
+The residuals show a normal distribution.
 
-```{r}
+
+Evaluation:
+- Residuals distribution, Q-Q plot, and Shapiro-Wilk test.
+
+
+```{r, message=FALSE, warning=FALSE}
+hist(residuals(Intention_lm)) 
+```
+
+
+```{r, message=FALSE, warning=FALSE}
 par(mfrow=c(2,2))
 plot(Intention_lm)
 par(mfrow=c(1,1))
 ```
 
-### B5. Multicollinality: evaluate if the IVs are redundant.
 
-```{r}
+
+## C. Additional information
+
+
+### C1. Multicollinality: 
+
+Evaluate if the IVs are redundant. This happen when VIs are highly correlated.
+
+Evaluation:
+- Tolerance (TOL) and Variance Inflation of Factor (VIF)
+
+
+```{r, message=FALSE, warning=FALSE}
 vif(Intention_lm)
 ```
+
+```{r, message=FALSE, warning=FALSE}
+library(see)
+library(performance)
+
+x<-check_collinearity(Intention_lm)
+x
+plot(x)
+# los valores de VIF <6
+```
+
+
+### C2. Diagnostics.
+
+Evaluation:
+
+- Cook distances.
+
+values don't must be bigger than 1.
+
+
+```{r, message=FALSE, warning=FALSE}
+#the car package (Companion to Applied Regression)
+
+# Load the car package
+library(car)
+
+# Compute influence measures, including Cook's distance
+influence <- influence.measures(Intention_lm)
+
+# Access Cook's distance from the influence object
+cook_dist <- influence$infmat[,7] #I put [,7] because that its the column that contains cook distances.
+
+summary(cook_dist)
+
+# Plot Cook's distance
+plot(cook_dist, pch = 19, main = "Cook's Distance Plot")
+abline(h = 4 * mean(cook_dist), col = "red", lty = 2)
+
+```
+
+Interpretation: It's ok because any points is greater than 1.
+
+
+
+# Referencias
+
+- Dariusz Drążkowski & Radosław Trepanowski (2022) Reactance and perceived disease severity as determinants of COVID-19 vaccination intention: an application of the theory of planned behavior, Psychology, Health & Medicine, 27:10, 2171-2178, DOI: 10.1080/13548506.2021.2014060
+
+
+
+
+
+
 
 
 
